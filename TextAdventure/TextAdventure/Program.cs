@@ -4,31 +4,30 @@ internal class Program
 {
 	public static void Main()
 	{
-		var locations = GetLocations();
-		var player = new Player("Eric")
-		{
-			CurrentLocation = locations["Home"],
-			PreviousLocation = locations["Home"]
-		};
+		var locations = new Locations();
+		var player = new Player("Eric");
 
 		Intro(player.Name);
 
 		var userInput = "";
 		do
 		{
-			DisplayLocations(locations, player.CurrentLocation);
+			Console.WriteLine("\n---Where would you like to go?---");
+			locations.DisplayLocations();
 			userInput = GetUserInput();
-			if (!IsValidLocation(userInput, locations))
+
+			if (!locations.IsValidLocation(userInput))
 			{
 				Console.WriteLine($"Location '{userInput}' not recognized.");
 			}
 			else
 			{
-				player.PreviousLocation = player.CurrentLocation;
-				var success = TryMovePlayerToLocation(player, locations[userInput]);
+				var moveMsg = $"You moved from {locations.CurrentPlayerLocation.Name} ";
+				var success = locations.TryMovePlayerToLocation(player, userInput);
 				if (success)
 				{
-					Console.Write($"You moved from {player.PreviousLocation.Name} to {player.CurrentLocation.Name}\n");
+					moveMsg += $"to {locations.CurrentPlayerLocation.Name}";
+					Console.WriteLine(moveMsg);
 				}
 				else
 				{
@@ -38,8 +37,6 @@ internal class Program
 		} while (userInput != "exit");
 	}
 
-	private static bool IsValidLocation(string loc, Dictionary<string, Location> locations) =>
-		locations.ContainsKey(loc);
 
 	private static void Intro(string name)
 	{
@@ -53,49 +50,5 @@ internal class Program
 		Console.Write(">>> ");
 		var input = Console.ReadLine()?.Trim();
 		return input ?? "";
-	}
-
-	private static void DisplayLocations(Dictionary<string, Location> locations, Location? currentLocation)
-	{
-		Console.WriteLine("\n---Where would you like to go?---");
-		foreach (var loc in locations.Where(loc => loc.Value != currentLocation))
-		{
-			Console.WriteLine(loc.Value);
-		}
-
-		Console.WriteLine();
-	}
-
-	private static Dictionary<string, Location> GetLocations()
-	{
-		Dictionary<string, Location> locations = new()
-		{
-			["Home"] = new Location(
-				"Home",
-				"Home base, where you originated from"
-			),
-			["Green Meadows"] = new Location(
-				"Green Meadows",
-				"A lush sea of green for all the eyes can see, with strange looking plant life and trees."
-			),
-
-			["Train City"] = new Location(
-				"Train City",
-				"A city entangled by long elevated rail lines that wrap around everything."
-			),
-		};
-
-		return locations;
-	}
-
-	private static bool TryMovePlayerToLocation(Player player, Location location)
-	{
-		if (player.CurrentLocation != location)
-		{
-			player.CurrentLocation = location;
-			return true;
-		}
-
-		return false;
 	}
 }
