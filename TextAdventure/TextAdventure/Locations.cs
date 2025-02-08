@@ -11,16 +11,6 @@ public class Locations
 		CurrentPlayerLocation = GetLocation("Home");
 	}
 
-	private static IList<Location> InitLocations()
-	{
-		IList<Location> locations = [];
-		locations.Add(
-			new Location("Home", "Your starting position. You are safe here, as safe as you can be, at least."));
-		locations.Add(new Location("Green Meadows", "Lush sea of green for all the eyes can see."));
-		locations.Add(new Location("Train City",
-			"A large metropolis strangled by elevated rail lines twisting and turning"));
-		return locations;
-	}
 
 	public void DisplayLocations()
 	{
@@ -30,7 +20,7 @@ public class Locations
 		}
 	}
 
-	public bool TryMovePlayerToLocation(Player player, string locationName)
+	public bool TryMovePlayerToLocation(string locationName)
 	{
 		if (IsValidLocation((locationName)))
 		{
@@ -54,6 +44,17 @@ public class Locations
 	public bool IsValidLocation(string locationName)
 	{
 		return _allLocations.Any(loc => loc.Name == locationName);
+	}
+
+	private static IList<Location> InitLocations()
+	{
+		IList<Location> locations = [];
+		locations.Add(
+			new Location("Home", "Your starting position. You are safe here, as safe as you can be, at least."));
+		locations.Add(new Location("Green Meadows", "Lush sea of green for all the eyes can see."));
+		locations.Add(new Location("Train City",
+			"A large metropolis strangled by elevated rail lines twisting and turning"));
+		return locations;
 	}
 }
 

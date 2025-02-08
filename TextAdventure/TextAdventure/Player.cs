@@ -1,11 +1,10 @@
 namespace TextAdventure;
 
-public class Player
+public class Player : Character
 {
-	public string Name { get; }
-
-	public Player(string name)
+	public Player(string name, int maxHealth, int minDmg, int maxDmg) : base(name, maxHealth, minDmg, maxDmg)
 	{
-		Name = name;
 	}
+
+	public override void DisplayName() => Utils.ColorizeWrite(Name, ConsoleColor.Green);
 }
