@@ -38,10 +38,16 @@ public abstract class Character
 		Console.Write($" health ({oldHealth}) => ({_currentHealth})");
 	}
 
-	public int DealDmg()
+	public void DealDmgTo(Character character)
 	{
 		var rand = new Random();
-		return rand.Next(_minDmg, _maxDmg + 1);
+		var amnt = rand.Next(_minDmg, _maxDmg + 1);
+		character.ReceiveDamage(amnt);
+
+		DisplayName();
+		Console.Write($" deals {amnt} damage to ");
+		character.DisplayName();
+		Console.WriteLine();
 	}
 
 	public void DisplayHealth()

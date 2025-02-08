@@ -20,23 +20,9 @@ public class Combat
 
 		while (_player.IsAlive() && _enemy.IsAlive())
 		{
-			var playerDmg = _player.DealDmg();
-			_enemy.ReceiveDamage(playerDmg);
-
-			_player.DisplayName();
-			Console.Write($" deals {playerDmg} to ");
-			_enemy.DisplayName();
-			Console.Write("\n");
-
-			Thread.Sleep(800);
-
-			var enemyDmg = _enemy.DealDmg();
-			_player.ReceiveDamage(enemyDmg);
-
-			_enemy.DisplayName();
-			Console.Write($" deals {enemyDmg} to ");
-			_player.DisplayName();
-			Console.Write("\n");
+			_player.DealDmgTo(_enemy);
+			_enemy.DealDmgTo(_player);
+			Thread.Sleep(1000);
 		}
 
 		if (_player.IsAlive())
