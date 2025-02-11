@@ -7,6 +7,9 @@ internal class Program
 {
 	public static void Main()
 	{
+		var viewData = new ViewData();
+		viewData.DisplayTodoTable();
+
 		var option = DisplayMainMenu();
 		switch (option)
 		{
@@ -16,6 +19,9 @@ internal class Program
 			case "Update":
 				break;
 			case "Delete":
+				break;
+			case "Exit":
+				Environment.Exit(1);
 				break;
 		}
 	}
@@ -27,7 +33,8 @@ internal class Program
 				.AddChoices([
 					"Add new",
 					"Update",
-					"Delete"
+					"Delete",
+					"Exit"
 				]));
 	}
 }

@@ -2,12 +2,32 @@ using Spectre.Console;
 
 namespace Todo.Services;
 
-public class AddItem
+public static class AddItem
 {
 	public static async void Init()
 	{
-		var (text, dueDate) = DisplayAddTodoMenu();
-		var result = await AddTodoItem(text, dueDate);
+		var finishedAdding = false;
+		while (!finishedAdding)
+		{
+			var (text, dueDate) = DisplayAddTodoMenu();
+			var result = await AddTodoItem(text, dueDate);
+			if (result == 1)
+			{
+				AnsiConsole.Markup("[green]Success! Data succesffuly saved[/]\n");
+			}
+
+			var addMore = AnsiConsole.Prompt(
+				new TextPrompt<bool>("Add another?")
+					.AddChoice(true)
+					.AddChoice(false)
+					.DefaultValue(true)
+					.WithConverter(choice => choice ? "y" : "n"));
+
+			if (!addMore)
+			{
+				finishedAdding = true;
+			}
+		}
 	}
 
 
@@ -63,7 +83,7 @@ public class AddItem
 		}
 		catch (Exception e)
 		{
-			Console.WriteLine($"Something went wrong when adding todo item:\n{e}");
+			AnsiConsole.Markup($"[red]Something went wrong when adding todo item:[/]\n{e}");
 			return 0;
 		}
 	}
