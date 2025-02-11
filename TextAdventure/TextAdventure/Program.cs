@@ -9,7 +9,7 @@ internal class Program
 
 		Intro(player.Name);
 
-		var input = "";
+		string input;
 		do
 		{
 			Console.WriteLine("---Where would you like to go?---");
