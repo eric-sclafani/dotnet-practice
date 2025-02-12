@@ -6,30 +6,13 @@ public static class AddItem
 {
 	public static async void Init()
 	{
-		var finishedAdding = false;
-		while (!finishedAdding)
+		var (text, dueDate) = DisplayAddTodoMenu();
+		var result = await AddTodoItem(text, dueDate);
+		if (result == 1)
 		{
-			var (text, dueDate) = DisplayAddTodoMenu();
-			var result = await AddTodoItem(text, dueDate);
-			if (result == 1)
-			{
-				AnsiConsole.Markup("[green]Success! Data succesffuly saved[/]\n");
-			}
-
-			var addMore = AnsiConsole.Prompt(
-				new TextPrompt<bool>("Add another?")
-					.AddChoice(true)
-					.AddChoice(false)
-					.DefaultValue(true)
-					.WithConverter(choice => choice ? "y" : "n"));
-
-			if (!addMore)
-			{
-				finishedAdding = true;
-			}
+			AnsiConsole.Markup("[green]Success! Data successfuly saved[/]\n");
 		}
 	}
-
 
 	private static (string, DateTime?) DisplayAddTodoMenu()
 	{

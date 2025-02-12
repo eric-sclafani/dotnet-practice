@@ -7,22 +7,26 @@ internal class Program
 {
 	public static void Main()
 	{
-		var viewData = new ViewData();
-		viewData.DisplayTodoTable();
-
-		var option = DisplayMainMenu();
-		switch (option)
+		while (true)
 		{
-			case "Add new":
-				AddItem.Init();
-				break;
-			case "Update":
-				break;
-			case "Delete":
-				break;
-			case "Exit":
-				Environment.Exit(1);
-				break;
+			var viewData = new ViewData();
+			viewData.DisplayTodoTable();
+
+			var option = DisplayMainMenu();
+			switch (option)
+			{
+				case "Add new":
+					AddItem.Init();
+					break;
+				case "Update":
+					break;
+				case "Delete":
+					DeleteItem.Init(viewData.TodoItems);
+					break;
+				case "Exit":
+					Environment.Exit(1);
+					break;
+			}
 		}
 	}
 

@@ -4,7 +4,7 @@ namespace Todo.Services;
 
 public class ViewData
 {
-	private IList<TodoItem> _todoItems = GetTodoItems();
+	public readonly IList<TodoItem> TodoItems = GetTodoItems();
 
 	private static List<TodoItem> GetTodoItems()
 	{
@@ -21,7 +21,7 @@ public class ViewData
 		table.AddColumn("Is Completed");
 		table.AddColumn("DueDate");
 
-		foreach (var item in _todoItems)
+		foreach (var item in TodoItems)
 		{
 			table.AddRow(
 				item.Id.ToString(),
