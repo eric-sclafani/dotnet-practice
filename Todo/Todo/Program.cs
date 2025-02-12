@@ -19,6 +19,7 @@ internal class Program
 					AddItem.Init();
 					break;
 				case "Update":
+					UpdateItem.Init();
 					break;
 				case "Delete":
 					DeleteItem.Init(viewData.TodoItems);
