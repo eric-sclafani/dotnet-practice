@@ -14,6 +14,14 @@ internal class Program
 		if (username is not null)
 		{
 			var userEvents = await ProcessUserEvents(client, username);
+
+			if (userEvents is not null)
+			{
+				foreach (var e in userEvents)
+				{
+					Console.WriteLine(e);
+				}
+			}
 		}
 	}
 

@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace GithubActivity;
@@ -8,23 +9,34 @@ public class GitHubEvent
 
 	[JsonPropertyName("type")] public string? Type { get; set; }
 
-	[JsonPropertyName("actor")] public Actor? Actor { get; set; }
-
 	[JsonPropertyName("repo")] public Repo? Repo { get; set; }
 
 	[JsonPropertyName("created_at")] public DateTime CreatedAt { get; set; }
 
-	[JsonPropertyName("payload")]
-	public object? Payload { get; set; } // You can create specific models for different event types
-}
+	[JsonPropertyName("payload")] public dynamic? Payload { get; set; }
 
-public class Actor
-{
-	[JsonPropertyName("id")] public int Id { get; set; }
+	public override string ToString()
+	{
+		try
+		{
+			var payload = JsonSerializer.Deserialize<dynamic>(Payload);
 
-	[JsonPropertyName("login")] public string? Login { get; set; }
-
-	[JsonPropertyName("avatar_url")] public string? AvatarUrl { get; set; }
+			var eventString = Type switch
+			{
+				"PushEvent" => $"Pushed {payload.GetProperty("size")} commits to {Repo?.Name}",
+				"IssuesEvent" => $"Opened a new issue in {Repo?.Name}",
+				"CreateEvent" => $"Created a new branch in {Repo?.Name}",
+				"PullRequestEvent" => $"Created a new pull request in {Repo?.Name}",
+				"WatchEvent" => $"Starred {Repo?.Name}",
+				_ => ""
+			};
+			return eventString;
+		}
+		catch
+		{
+			return "";
+		}
+	}
 }
 
 public class Repo
