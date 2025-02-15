@@ -1,5 +1,3 @@
-using Spectre.Console;
-
 namespace TodoCLI;
 
 public static class Utils
@@ -55,5 +53,26 @@ public static class Utils
 		}
 
 		return null;
+	}
+
+	public static string? ValidateListOption(string[] args)
+	{
+		try
+		{
+			string[] validOptions = ["done", "todo", "in-progress"];
+			var listOption = args[1];
+
+			if (validOptions.Contains(listOption))
+			{
+				return listOption;
+			}
+
+			ErrorMsg($"list option '{listOption}' not valid.");
+			return null;
+		}
+		catch
+		{
+			return null;
+		}
 	}
 }

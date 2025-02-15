@@ -17,6 +17,7 @@ public class TodoService
 		var todo = new Todo()
 		{
 			Description = text,
+			Status = "To Do",
 			CreatedAt = DateTime.Today,
 			UpdatedAt = DateTime.Today
 		};
@@ -37,26 +38,64 @@ public class TodoService
 		}
 		else
 		{
-			Utils.ErrorMsg($"id {id} not found");
+			Utils.ErrorMsg($"Todo with id {id} not found");
 		}
 	}
 
-	// public async void Delete(int id)
-	// {
-	// }
-
-	// public async void MarkDone()
-	// {
-	// }
-	//
-	// public async void MarkInProgress()
-	// {
-	// }
-
-	public void List(string? sortBy = null)
+	public async void Delete(int id)
 	{
-		var todos = _context.Todos.OrderByDescending(t => t.Id);
+		var todo = _context.Todos.FirstOrDefault(t => t.Id == id);
+		if (todo is not null)
+		{
+			_context.Remove(todo);
+			await _context.SaveChangesAsync();
+			Utils.SuccessMsg();
+		}
+		else
+		{
+			Utils.ErrorMsg($"Todo with id {id} not found");
+		}
+	}
 
+	public async void MarkDone(int id)
+	{
+		var todo = _context.Todos.FirstOrDefault(t => t.Id == id);
+		if (todo is not null)
+		{
+			todo.Status = "Done";
+			await _context.SaveChangesAsync();
+			Utils.SuccessMsg();
+		}
+		else
+		{
+			Utils.ErrorMsg($"Todo with id {id} not found");
+		}
+	}
+
+	public async void MarkInProgress(int id)
+	{
+		var todo = _context.Todos.FirstOrDefault(t => t.Id == id);
+		if (todo is not null)
+		{
+			todo.Status = "In Progress";
+			await _context.SaveChangesAsync();
+			Utils.SuccessMsg();
+		}
+		else
+		{
+			Utils.ErrorMsg($"Todo with id {id} not found");
+		}
+	}
+
+	public void List(string? listOption = null)
+	{
+		var todos = listOption switch
+		{
+			"done" => _context.Todos.Where(t => t.Status == "Done").OrderByDescending(t => t.Id),
+			"todo" => _context.Todos.Where(t => t.Status == "To Do").OrderByDescending(t => t.Id),
+			"in-progress" => _context.Todos.Where(t => t.Status == "In Progress").OrderByDescending(t => t.Id),
+			_ => _context.Todos.OrderByDescending(t => t.Id)
+		};
 
 		var table = new Table();
 		table.AddColumns(

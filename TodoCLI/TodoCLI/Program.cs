@@ -26,8 +26,10 @@ public class Program
 					Delete(args, todoService);
 					break;
 				case "mark-in-progress":
+					MarkInProgress(args, todoService);
 					break;
 				case "mark-done":
+					MarkDone(args, todoService);
 					break;
 				case "list":
 					List(args, todoService);
@@ -35,14 +37,14 @@ public class Program
 				case "help":
 					break;
 				default:
-					Console.WriteLine(
-						$"Invalid command: '{action}'. Type 'help' to see a list of valid commands");
+					Utils.ErrorMsg(
+						$"Invalid command '{action}'. Type 'help' to see a list of valid commands");
 					break;
 			}
 		}
 		else
 		{
-			Console.WriteLine("Error: no arguments provided. Type 'help' to see a list of valid commands");
+			Utils.ErrorMsg("no arguments provided. Type 'help' to see a list of valid commands");
 		}
 	}
 
@@ -65,13 +67,34 @@ public class Program
 		}
 	}
 
+	private static void MarkDone(string[] args, TodoService service)
+	{
+		var id = Utils.ValidateId(args);
+		service.MarkDone(id);
+	}
+
+	private static void MarkInProgress(string[] args, TodoService service)
+	{
+		var id = Utils.ValidateId(args);
+		service.MarkInProgress(id);
+	}
+
 	private static void List(string[] args, TodoService service)
 	{
-		service.List();
+		var listOption = Utils.ValidateListOption(args);
+		if (listOption is not null)
+		{
+			service.List(listOption);
+		}
+		else if (args.Length == 1)
+		{
+			service.List();
+		}
 	}
 
 	private static void Delete(string[] args, TodoService service)
 	{
 		var id = Utils.ValidateId(args);
+		service.Delete(id);
 	}
 }
