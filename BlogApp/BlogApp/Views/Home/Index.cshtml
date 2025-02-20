@@ -1,0 +1,27 @@
+﻿@model IList<BlogPost>
+@{
+	ViewData["Title"] = "Home Page";
+}
+
+<div class="d-flex flex-column align-items-center gap-3">
+
+	<a asp-controller="Blog" asp-action="Create" class="btn btn-outline-primary">Create new post</a>
+
+	<div id="all-posts-wrapper">
+		<ul>
+			@foreach (var post in Model)
+			{
+				<li>
+					<a
+						asp-controller="Blog"
+						asp-action="Index"
+						asp-route-id="@post.Id">
+						<strong>@post.Title</strong>: @post.ShortenedContent()
+					</a>
+				</li>
+			}
+		</ul>
+	</div>
+
+
+</div>
