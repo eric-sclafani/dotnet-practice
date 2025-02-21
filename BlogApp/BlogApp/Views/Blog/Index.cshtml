@@ -1,21 +1,24 @@
 @model BlogPost
 @{
-	ViewBag.Title = Model.Title ?? "View Post";
+	ViewBag.Title = "View Post";
 	Layout = "_Layout";
 }
 
-<h3>@Model.Title</h3>
-<div class="d-flex flex-column">
-	<hr>
-	<span>Created on: @Model.CreatedAt</span>
-	<span>Last update on: @Model.LastUpdatedAt</span>
-	<hr>
-</div>
-<article>
-	@Model.Content
-</article>
 
-<div class="d-flex">
-	<a asp-controller="Blog" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-outline-success">Update</a>
-	<a asp-controller="Blog" asp-action="Delete" class="btn btn-outline-danger">Delete</a>
+<div class="d-flex flex-column gap-3 align-items-center">
+
+	<h2>@Model.Title</h2>
+	<div class="date-wrapper d-flex flex-column small">
+		<div>Created on: @Model.CreatedAt</div>
+		<div>Last update on: @Model.LastUpdatedAt</div>
+	</div>
+	<article>
+		@Model.Content
+	</article>
+
+	<div class="d-flex">
+		<a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">&larr; Back</a>
+		<a asp-controller="Blog" asp-action="Update" asp-route-id="@Model.Id" class="btn btn-outline-success">Update</a>
+		<a asp-controller="Blog" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Delete</a>
+	</div>
 </div>

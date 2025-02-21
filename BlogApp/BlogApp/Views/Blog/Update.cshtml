@@ -1,4 +1,4 @@
-@model BlogApp.Models.BlogPost
+@model BlogPost
 @{
 	ViewBag.Title = "Update";
 	Layout = "_Layout";
@@ -7,7 +7,7 @@
 <h2>Update</h2>
 <form asp-action="Update">
 	<label>Title</label>
-	<input asp-for="Title" value="@Model.Title" class="form-control"/>
+	<input asp-for="Title" class="form-control"/>
 	<label>Content</label>
 	<textarea asp-for="Content" class="form-control"></textarea>
 	<button type="submit" class="btn btn-outline-success">Submit</button>

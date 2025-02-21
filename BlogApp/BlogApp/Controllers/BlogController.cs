@@ -40,9 +40,21 @@ public class BlogController : Controller
 		return View(post);
 	}
 
-	public IActionResult Delete()
+	public IActionResult Delete(int id)
 	{
-		return View();
+		var post = _context.BlogPost.FirstOrDefault(p => p.Id == id);
+		if (post == null)
+			return NotFound();
+
+		return View(post);
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> Delete(BlogPost post)
+	{
+		_context.BlogPost.Remove(post);
+		await _context.SaveChangesAsync();
+		return RedirectToAction("Index", "Home");
 	}
 
 	public IActionResult Update(int id)
@@ -54,13 +66,19 @@ public class BlogController : Controller
 		return View(post);
 	}
 
-	// [HttpPost]
-	// public async Task<IActionResult> Update(BlogPost post)
-	// {
-	// 	if (ModelState.IsValid)
-	// 	{
-	// 		
-	// 	}
-	// 	return View(post);
-	// }
+	[HttpPost]
+	public async Task<IActionResult> Update(BlogPost updatedPost)
+	{
+		var post = _context.BlogPost.FirstOrDefault(p => p.Id == updatedPost.Id);
+		if (ModelState.IsValid && post != null)
+		{
+			post.Title = updatedPost.Title;
+			post.Content = updatedPost.Content;
+			post.LastUpdatedAt = DateTime.Now;
+			await _context.SaveChangesAsync();
+			return RedirectToAction("Index", "Blog", new { id = updatedPost.Id });
+		}
+
+		return View(updatedPost);
+	}
 }
