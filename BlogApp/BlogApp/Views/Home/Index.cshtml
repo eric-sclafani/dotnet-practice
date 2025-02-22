@@ -14,19 +14,42 @@
 	</a>
 
 	<div id="all-posts-wrapper">
-		<ul>
-			@foreach (var post in Model)
+		@{
+			if (Model.Any())
 			{
-				<li class="list-post-item">
-					<a
-						asp-controller="Blog"
-						asp-action="Index"
-						asp-route-id="@post.Id">
-						<strong>@post.Title</strong>: @post.ShortenedContent()
-					</a>
-				</li>
+				<ul id="post-list">
+					@foreach (var post in Model)
+					{
+						<li class="list-post-item-wrapper">
+							<a
+								class="fs-5 list-post-item"
+								asp-controller="Blog"
+								asp-action="Index"
+								asp-route-id="@post.Id">
+								<div class="container pt-1 pb-1">
+									<div class="row">
+										<div class="col-5 fw-bold fs-4">@post.Title</div>
+										<div class="col-3 fs-6 fst-italic">Created: @post.CreatedAt.ToShortDateString()</div>
+										<div class="col-4 fs-6 fst-italic">Last updated: @post.LastUpdatedAt.ToShortDateString()</div>
+									</div>
+									<div class="row">
+
+										<div class="col fs-6"> @post.ShortenedContent()</div>
+									</div>
+								</div>
+							</a>
+						</li>
+					}
+				</ul>
 			}
-		</ul>
+			else
+			{
+				<div class="small">
+					<em>It feels empty in here...</em>
+				</div>
+			}
+		}
+
 	</div>
 
 

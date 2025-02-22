@@ -5,20 +5,23 @@
 }
 
 
-<div class="d-flex flex-column gap-3" style="margin-left:20px">
-
+<div class="container" style="margin-left:20px">
 	<h2>@Model.Title</h2>
-	<div class="date-wrapper d-flex flex-column small">
-		<div>Created on: @Model.CreatedAt</div>
-		<div>Last update on: @Model.LastUpdatedAt</div>
+	<div class="row small">
+		<div class="col-2">Created on: @Model.CreatedAt.ToShortDateString()</div>
+		<div class="col-2">Last update on: @Model.LastUpdatedAt.ToShortDateString()</div>
 	</div>
-	<article>
-		@Model.Content
-	</article>
+	<div class="d-flex flex-column gap-5">
 
-	<div class="d-flex gap-3">
-		<a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">&larr; Back</a>
-		<a asp-controller="Blog" asp-action="AddOrEdit" asp-route-id="@Model.Id" class="btn btn-outline-success">Update</a>
-		<a asp-controller="Blog" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger">Delete</a>
+			<div class="col">
+				@Model.Content
+			</div>
+
+		<div class="row gap-3">
+			<a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary col-1">&larr; Back</a>
+			<a asp-controller="Blog" asp-action="AddOrEdit" asp-route-id="@Model.Id" class="btn btn-outline-success col-1">Update</a>
+			<a asp-controller="Blog" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-outline-danger col-1">Delete</a>
+		</div>
 	</div>
+
 </div>

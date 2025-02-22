@@ -15,6 +15,23 @@ html {
   width:60vw;
   overflow-y: auto;
 }
+
+#post-list{
+  list-style:none;
+  padding:0;
+}
+
+.list-post-item {
+  color:black;
+  text-decoration:none;
+}
+
+.list-post-item-wrapper:hover {
+  color:black;
+  background-color: rgb(171, 169, 169, 0.5);
+  border-radius:20px;
+}
+
 .header-title {
   font-size: 70px;
   font-weight: 600;
