@@ -4,14 +4,20 @@
 }
 
 <div class="d-flex flex-column align-items-center gap-3">
-
-	<a asp-controller="Blog" asp-action="Create" class="btn btn-outline-primary">Create new post</a>
+	<h1 class="header-title">Amazing Blog</h1>
+	<a
+		asp-controller="Blog"
+		asp-action="AddOrEdit"
+		asp-route-id="0"
+		class="btn btn-outline-primary">
+		<h4 class="m-0">Create new post</h4>
+	</a>
 
 	<div id="all-posts-wrapper">
 		<ul>
 			@foreach (var post in Model)
 			{
-				<li>
+				<li class="list-post-item">
 					<a
 						asp-controller="Blog"
 						asp-action="Index"

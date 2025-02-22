@@ -11,4 +11,15 @@ html {
   border: solid rgb(176, 179, 184, 0.4);
   border-radius:20px;
   padding:20px;
+  height:65vh;
+  width:60vw;
+  overflow-y: auto;
+}
+.header-title {
+  font-size: 70px;
+  font-weight: 600;
+  background-image: linear-gradient(to left, #553c9a, #b393d3);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 }
