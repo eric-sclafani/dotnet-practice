@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using JobSearch.Enums;
 
 namespace JobSearch.Models;
 
@@ -13,8 +12,12 @@ public class Job
 	public string? Employer { get; set; }
 	public string? Location { get; set; }
 	public int Salary { get; set; }
-	[Column(TypeName = "nvarchar(24)")] public JobType JobType { get; set; }
-	[Column(TypeName = "nvarchar(24)")] public WorkMode WorkMode { get; set; }
+	
+	public JobType JobType { get; set; } = null!;
+	public int JobTypeId { get; set; }
+	
+	public WorkMode? WorkMode { get; set; }
+	public int WorkModeId { get; set; }
 
 	// schedule, benefits, responsibilities, required skills,
 }

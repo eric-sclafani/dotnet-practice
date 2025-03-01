@@ -13,7 +13,7 @@ public class Applicant
 	public string? Location { get; set; }
 
 	public int UserId { get; set; }
-	public User? User { get; set; }
+	public User User { get; set; } = null!;
 
 	// skills
 }

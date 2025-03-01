@@ -1,4 +1,3 @@
-using JobSearch.Enums;
 using JobSearch.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +5,11 @@ namespace JobSearch.Data;
 
 public class JobBoardDbContext : DbContext
 {
-	public DbSet<Job> Jobs { get; set; }
+	public DbSet<Job> Jobs { get; init; }
+	public DbSet<JobType> JobTypes { get; init; }
+	public DbSet<WorkMode> WorkModes { get; init; }
+	public DbSet<User> Users { get; init; }
+	public DbSet<Applicant> Applicants { get; init; }
 
 	public JobBoardDbContext(DbContextOptions<JobBoardDbContext> options) : base(options)
 	{
@@ -19,6 +22,70 @@ public class JobBoardDbContext : DbContext
 
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
+		EstablishRelationships(modelBuilder);
+		SeedData(modelBuilder);
+	}
+
+	private static void EstablishRelationships(ModelBuilder modelBuilder)
+	{
+		modelBuilder.Entity<Job>()
+			.HasOne(j => j.JobType)
+			.WithMany()
+			.HasForeignKey(j => j.JobTypeId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+		modelBuilder.Entity<Job>()
+			.HasOne(j => j.WorkMode)
+			.WithMany()
+			.HasForeignKey(j => j.WorkModeId)
+			.OnDelete(DeleteBehavior.Restrict);
+
+		modelBuilder.Entity<Applicant>()
+			.HasOne(a => a.User)
+			.WithOne(u => u.Applicant)
+			.HasForeignKey<Applicant>(a => a.UserId)
+			.OnDelete(DeleteBehavior.Restrict);
+	}
+
+	private static void SeedData(ModelBuilder modelBuilder)
+	{
+		modelBuilder.Entity<JobType>().HasData(
+			new JobType
+			{
+				Id = 1,
+				Type = "Full Time"
+			},
+			new JobType
+			{
+				Id = 2,
+				Type = "Part Time"
+			},
+			new JobType
+			{
+				Id = 3,
+				Type = "Contract"
+			}
+		);
+
+		modelBuilder.Entity<WorkMode>().HasData(
+			new WorkMode
+			{
+				Id = 1,
+				Mode = "Remote"
+			},
+			new WorkMode
+			{
+				Id = 2,
+				Mode = "Hybrid"
+			},
+			new WorkMode
+			{
+				Id = 3,
+				Mode = "In Person"
+			}
+		);
+
+
 		modelBuilder.Entity<Job>().HasData(
 			new Job
 			{
@@ -29,8 +96,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "ABC Solutions",
 				Location = "Las Vegas, Nevada",
 				Salary = 65000,
-				JobType = JobType.FullTime,
-				WorkMode = WorkMode.Remote
+				JobTypeId = 1,
+				WorkModeId = 1
 			},
 			new Job
 			{
@@ -41,8 +108,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "The Law Office of Shlifer & Launis ",
 				Location = "Washington D.C",
 				Salary = 135000,
-				JobType = JobType.FullTime,
-				WorkMode = WorkMode.InPerson
+				JobTypeId = 1,
+				WorkModeId = 2
 			},
 			new Job
 			{
@@ -53,8 +120,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "Dumbo Steakhouse",
 				Location = "Dumbo",
 				Salary = 120000,
-				JobType = JobType.FullTime,
-				WorkMode = WorkMode.InPerson
+				JobTypeId = 1,
+				WorkModeId = 3
 			},
 			new Job
 			{
@@ -65,8 +132,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "Southbound Deliveries",
 				Location = "Miami, Florida",
 				Salary = 53000,
-				JobType = JobType.PartTime,
-				WorkMode = WorkMode.InPerson
+				JobTypeId = 3,
+				WorkModeId = 3
 			},
 			new Job
 			{
@@ -77,8 +144,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "FoodMarket",
 				Location = "Hoboken",
 				Salary = 28000,
-				JobType = JobType.PartTime,
-				WorkMode = WorkMode.InPerson
+				JobTypeId = 2,
+				WorkModeId = 3
 			},
 			new Job
 			{
@@ -89,8 +156,8 @@ public class JobBoardDbContext : DbContext
 				Employer = "Ajax Technologies",
 				Location = "Financial District, Manhattan",
 				Salary = 145000,
-				JobType = JobType.FullTime,
-				WorkMode = WorkMode.Hybrid
+				JobTypeId = 1,
+				WorkModeId = 2
 			}
 		);
 	}
