@@ -1,6 +1,7 @@
 using JobSearch.Data;
 using JobSearch.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace JobSearch.Controllers;
 
@@ -22,6 +23,7 @@ public class JobController : Controller
 		}
 
 		// for job type and work mode, need to join on LU table 
+
 		JobViewModel jobVm = new()
 		{
 			JobId = job.Id,
@@ -39,12 +41,21 @@ public class JobController : Controller
 		return View(jobs);
 	}
 
-	public IActionResult AddEdit(int id)
+	public async Task<IActionResult> AddEdit(int id)
 	{
+		var jobTypes = await _context.JobTypes.ToListAsync();
+		var workModes = await _context.WorkModes.ToListAsync();
+
+		JobViewModel jobVm = new()
+		{
+			JobTypeOptions = jobTypes,
+			WorkModeOptions = workModes
+		};
+
 		if (id == 0)
 		{
 			ViewBag.IsEditing = false;
-			return View();
+			return View(jobVm);
 		}
 
 		var job = _context.Jobs.FirstOrDefault(j => j.Id == id);
@@ -52,15 +63,12 @@ public class JobController : Controller
 		{
 			return RedirectToAction("PageNotFound", "Home");
 		}
-		
-		JobViewModel jobVm = new()
-		{
-			JobId = job.Id,
-			Title = job.Title,
-			Description = job.Description,
-			Employer = job.Employer,
-			Location = job.Location,
-		};
+
+		jobVm.JobId = job.Id;
+		jobVm.Title = job.Title;
+		jobVm.Description = job.Description;
+		jobVm.Employer = job.Employer;
+		jobVm.Location = job.Location;
 
 		ViewBag.IsEditing = true;
 		return View(jobVm);
@@ -73,6 +81,7 @@ public class JobController : Controller
 		{
 			return View();
 		}
+
 		return View();
 	}
 }
