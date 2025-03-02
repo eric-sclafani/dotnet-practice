@@ -2,3 +2,17 @@
   box-sizing:border-box;
   margin:0;
 }
+
+.job-post-link,
+.job-post-link:hover {
+  text-decoration: none;
+  color: black;
+}
+
+.job-post-card:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+}
+
+.job-post-card:active {
+  background-color:lightgray;
+}

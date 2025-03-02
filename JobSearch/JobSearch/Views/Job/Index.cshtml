@@ -5,4 +5,21 @@
 	Layout = "_Layout";
 }
 
+<a
+	class="btn btn-outline-info"
+	asp-controller="Job"
+	asp-action="List"
+>
+	Back to List
+</a>
 <h2>@Model.Title</h2>
+<p>@Model.Description</p>
+<a
+	class="btn btn-outline-primary"
+	asp-controller="Job"
+	asp-action="AddEdit"
+	asp-route-id="@Model.JobId"
+	>
+	Edit
+</a>
+<a class="btn btn-outline-danger">Delete</a>

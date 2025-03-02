@@ -1,14 +1,17 @@
-using JobSearch.Enums;
+using JobSearch.Models;
 
 namespace JobSearch.ViewModels;
 
 public class JobViewModel
 {
-	public string? Title { get; set; }
-	public string? Description { get; set; }
-	public string? Employer { get; set; }
-	public string? Location { get; set; }
-	public int Salary { get; set; }
-	public JobType JobType { get; set; }
-	public WorkMode WorkMode { get; set; }
+	public required int JobId { get; set; }
+	public required string Title { get; set; }
+	public required string Description { get; set; }
+	public required string Employer { get; set; }
+	public string Location { get; set; } = string.Empty;
+	public string JobType { get; set; } = string.Empty;
+	public string WorkMode { get; set; } = string.Empty;
+	public int MinSalary { get; set; }
+	public int MaxSalary { get; set; }
+	public string PaySpecification { get; set; } = string.Empty;
 }

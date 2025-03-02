@@ -7,16 +7,18 @@ public class Job
 	[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 	public int Id { get; set; }
 
-	public string? Title { get; set; }
-	public string? Description { get; set; }
-	public string? Employer { get; set; }
-	public string? Location { get; set; }
-	public int Salary { get; set; }
-	
+	public required string Title { get; set; }
+	public required string Description { get; set; } 
+	public required string Employer { get; set; }
+	public string Location { get; set; } = string.Empty;
+	public int MinSalary { get; set; }
+	public int MaxSalary { get; set;  }
+	public string PaySpecification { get; set; } = string.Empty;
+
 	public JobType JobType { get; set; } = null!;
 	public int JobTypeId { get; set; }
-	
-	public WorkMode? WorkMode { get; set; }
+
+	public WorkMode WorkMode { get; set; } = null!;
 	public int WorkModeId { get; set; }
 
 	// schedule, benefits, responsibilities, required skills,

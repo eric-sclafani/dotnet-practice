@@ -5,16 +5,38 @@
 	Layout = "_Layout";
 }
 
-<h2>Viewing all jobs</h2>
+<div class="container-fluid">
+	<div class="row">
+		<h2>Viewing all jobs</h2>
+	</div>
 
-<ul>
-	@foreach (var job in Model)
-	{
-		<hr/>
-		<li>@job.Title</li>
-		<li>@job.Description</li>
-		<li>@job.Employer</li>
-		<li>@job.Salary</li>
-		<hr/>
-	}
-</ul>
+	<div class="row">
+		<div class="col-4">
+			@foreach (var job in Model)
+			{
+				<a
+					class="job-post-link"
+					asp-controller="Job"
+					asp-action="Index"
+					asp-route-id="@job.Id">
+					<div class="job-post-card card mt-2">
+						<div class="card-body">
+							<div class="card-title">
+								<strong>@job.Title</strong>
+							</div>
+							<div class="card-subtitle mb-2 text-body-secondary fst-italic">
+								@job.Employer
+							</div>
+						</div>
+					</div>
+				</a>
+			}
+		</div>
+
+		<div class="col">
+			Job view will eventually go here...
+		</div>
+
+	</div>
+
+</div>

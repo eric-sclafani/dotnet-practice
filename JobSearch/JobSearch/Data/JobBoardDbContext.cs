@@ -95,7 +95,6 @@ public class JobBoardDbContext : DbContext
 					"ABC Solutions is a Las Vegas-based software company specializing in custom enterprise solutions for businesses in the finance and healthcare industries. We develop scalable web applications using .NET technologies, helping our clients streamline operations and improve efficiency.\n\nWe’re looking for a Junior .NET Developer to join our growing team. In this role, you’ll work alongside experienced developers to build and maintain ASP.NET Core web applications, implement REST APIs, and optimize database queries using Entity Framework Core. You’ll also have the opportunity to participate in code reviews, collaborate on Agile development sprints, and gain hands-on experience with cloud deployment.",
 				Employer = "ABC Solutions",
 				Location = "Las Vegas, Nevada",
-				Salary = 65000,
 				JobTypeId = 1,
 				WorkModeId = 1
 			},
@@ -107,7 +106,6 @@ public class JobBoardDbContext : DbContext
 					"The Law Office of Shlifer & Launis is a well-established legal firm specializing in corporate law and litigation. We handle sensitive client data and require a skilled Database Administrator to ensure our systems remain secure, efficient, and compliant with industry regulations.\n\nAs a Database Administrator, you will be responsible for maintaining, optimizing, and securing our SQL databases, ensuring seamless access to case files, legal documents, and client records. You’ll also collaborate with our IT and legal teams to implement data backup strategies and improve database performance.",
 				Employer = "The Law Office of Shlifer & Launis ",
 				Location = "Washington D.C",
-				Salary = 135000,
 				JobTypeId = 1,
 				WorkModeId = 2
 			},
@@ -119,7 +117,6 @@ public class JobBoardDbContext : DbContext
 					"Dumbo Steakhouse is a high-end dining establishment in the heart of Brooklyn, known for its premium cuts, aged steaks, and gourmet dining experience. We are seeking an Executive Chef to lead our kitchen, craft innovative dishes, and maintain the highest culinary standards.\n\nIn this role, you will oversee menu development, kitchen staff training, ingredient sourcing, and quality control. You’ll also be responsible for ensuring consistency, food safety compliance, and cost control while delivering an unforgettable dining experience.",
 				Employer = "Dumbo Steakhouse",
 				Location = "Dumbo",
-				Salary = 120000,
 				JobTypeId = 1,
 				WorkModeId = 3
 			},
@@ -131,7 +128,6 @@ public class JobBoardDbContext : DbContext
 					"Southbound Deliveries is a regional logistics company specializing in fast and reliable last-mile deliveries. We are looking for a part-time Delivery Driver to help transport packages to businesses and residential customers.\n\nAs a driver, you will be responsible for safely operating company vehicles, ensuring on-time deliveries, and providing excellent customer service. The role requires a valid driver’s license, the ability to lift packages, and a strong attention to detail.",
 				Employer = "Southbound Deliveries",
 				Location = "Miami, Florida",
-				Salary = 53000,
 				JobTypeId = 3,
 				WorkModeId = 3
 			},
@@ -143,7 +139,6 @@ public class JobBoardDbContext : DbContext
 					"FoodMarket is a local grocery store committed to providing fresh, affordable food to the Hoboken community. We are hiring a part-time Cashier to assist customers, handle transactions, and ensure a smooth checkout experience.\n\nResponsibilities include scanning items, processing payments, providing friendly service, and assisting with store organization. This role is ideal for someone with strong communication skills and the ability to work in a fast-paced retail environment.",
 				Employer = "FoodMarket",
 				Location = "Hoboken",
-				Salary = 28000,
 				JobTypeId = 2,
 				WorkModeId = 3
 			},
@@ -155,7 +150,6 @@ public class JobBoardDbContext : DbContext
 					"Ajax Technologies is an innovative software company specializing in modern web applications for startups and enterprises. We are seeking a Fullstack Web Developer with expertise in the MERN stack (MongoDB, Express.js, React, Node.js) to help build and scale our next-generation digital platforms.\n\nIn this role, you will develop responsive front-end interfaces using React, design RESTful APIs with Node.js and Express, and manage MongoDB databases for efficient data handling. You’ll also work on state management, authentication systems, and cloud-based deployments.",
 				Employer = "Ajax Technologies",
 				Location = "Financial District, Manhattan",
-				Salary = 145000,
 				JobTypeId = 1,
 				WorkModeId = 2
 			}

@@ -20,7 +20,6 @@ else
 	app.UseDeveloperExceptionPage();
 }
 
-app.UseStatusCodePagesWithReExecute("/Home/PageNotFound");
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();

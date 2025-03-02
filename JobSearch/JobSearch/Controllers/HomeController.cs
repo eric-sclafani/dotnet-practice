@@ -14,12 +14,17 @@ public class HomeController : Controller
 		_logger = logger;
 	}
 
-	public IActionResult Index()
+	public ViewResult Index()
 	{
 		return View();
 	}
 
-	public IActionResult Privacy()
+	public ViewResult Privacy()
+	{
+		return View();
+	}
+
+	public ViewResult PageNotFOund()
 	{
 		return View();
 	}

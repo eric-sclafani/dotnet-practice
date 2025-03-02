@@ -1,8 +1,30 @@
 @model JobSearch.ViewModels.JobViewModel
 
 @{
-	ViewBag.Title = "title";
+	ViewBag.Title = ViewBag.IsEditing ? "Editing" : "Adding";
 	Layout = "_Layout";
 }
+<a
+	class="btn btn-outline-info"
+	asp-controller="Job"
+	asp-action="Index"
+	asp-route-id="@Model.JobId">
+	← Back
+</a>
 
-<h2>title</h2>
+@if (ViewBag.IsEditing)
+{
+	<h2>Editing Job</h2>
+}
+else
+{
+	<h2>Adding New Job</h2>
+}
+
+<form>
+	<div class="form-group">
+		<label asp-for="Title"></label>
+		<input class="form-control" type="text" asp-for="Title"/>
+		<span asp-validation-for="Title" class="text-danger"></span>
+	</div>
+</form>
