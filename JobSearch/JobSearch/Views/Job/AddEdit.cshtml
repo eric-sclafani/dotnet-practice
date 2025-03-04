@@ -34,6 +34,7 @@ else
 			<div class="col-4">
 				<fieldset class="border border-2 rounded-2 p-4">
 					<legend class="float-none w-auto p-2">Pay Information</legend>
+					<input type="hidden" asp-for="JobId"/>
 					<div class="d-flex gap-3">
 						<div class="form-check">
 							<input
@@ -98,7 +99,7 @@ else
 						<div class="form-group">
 							<label asp-for="JobTypeId"></label>
 							<select asp-for="JobTypeId">
-								@foreach (var jobType in @Model.JobTypeOptions)
+								@foreach (var jobType in @Model.JobTypeOptions!)
 								{
 									<option
 										selected="@jobType.Id==@Model.JobTypeId"
@@ -112,7 +113,7 @@ else
 						<div class="form-group">
 							<label asp-for="WorkModeId"></label>
 							<select asp-for="WorkModeId">
-								@foreach (var workMode in @Model.WorkModeOptions)
+								@foreach (var workMode in @Model.WorkModeOptions!)
 								{
 									<option
 										selected="@workMode.Id==@Model.WorkModeId"

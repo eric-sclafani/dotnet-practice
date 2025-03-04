@@ -17,6 +17,6 @@ public class JobViewModel
 	[DisplayName("Minimum Salary")] public int MinSalary { get; set; }
 	[DisplayName("Maximum Salary")] public int MaxSalary { get; set; }
 
-	public IEnumerable<JobType> JobTypeOptions { get; set; } = null!;
-	public IEnumerable<WorkMode> WorkModeOptions { get; set; } = null!;
+	public IEnumerable<JobType>? JobTypeOptions { get; set; }
+	public IEnumerable<WorkMode>? WorkModeOptions { get; set; }
 }
