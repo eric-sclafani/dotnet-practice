@@ -27,55 +27,117 @@ else
 	<h2>Adding New Job</h2>
 }
 
-<form asp-action="AddEdit">
-	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-	<div class="form-group">
-		<label asp-for="Title"></label>
-		<input class="form-control" type="text" asp-for="Title"/>
-		<span asp-validation-for="Title" class="text-danger"></span>
-	</div>
+<div class="container">
+	<form asp-action="AddEdit">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="row">
+			<div class="col-4">
+				<fieldset class="border border-2 rounded-2 p-4">
+					<legend class="float-none w-auto p-2">Pay Information</legend>
+					<div class="d-flex gap-3">
+						<div class="form-check">
+							<input
+								asp-for="PayType"
+								value="Annual"
+								class="form-check-input"
+								type="radio"
+								name="payType"
+								id="annualPay">
+							<label class="form-check-label" for="annualPay">
+								Annual
+							</label>
+						</div>
+						<div class="form-check">
+							<input
+								asp-for="PayType"
+								value="Hourly"
+								class="form-check-input"
+								type="radio"
+								name="payType"
+								id="hourlyPay">
+							<label class="form-check-label" for="hourlyPay">
+								Hourly
+							</label>
+						</div>
+					</div>
 
-	<div class="form-group">
-		<label asp-for="Employer"></label>
-		<input class="form-control" type="text" asp-for="Employer"/>
-		<span asp-validation-for="Employer" class="text-danger"></span>
-	</div>
 
-	<div class="form-group">
-		<label asp-for="Location"></label>
-		<input class="form-control" type="text" asp-for="Location"/>
-		<span asp-validation-for="Location" class="text-danger"></span>
-	</div>
+					<div class="form-group">
+						<label asp-for="MinSalary"></label>
+						<input class="form-control" type="number" asp-for="MinSalary"/>
+						<span asp-validation-for="Location" class="text-danger"></span>
+					</div>
 
-	<div class="form-group">
-		<label asp-for="JobTypeId"></label>
-		<select asp-for="JobTypeId">
-			@foreach (var jobType in @Model.JobTypeOptions)
-			{
-				<option
-					selected="@jobType.Id==@Model.JobTypeId"
-					value="@jobType.Id">
-					@jobType.Type
-				</option>
-			}
-		</select>
-		<span asp-validation-for="JobTypeId" class="text-danger"></span>
-	</div>
+					<div class="form-group">
+						<label asp-for="MaxSalary"></label>
+						<input class="form-control" type="number" asp-for="MaxSalary"/>
+						<span asp-validation-for="Location" class="text-danger"></span>
+					</div>
+				</fieldset>
+			</div>
 
-	<div class="form-group">
-		<label asp-for="WorkModeId"></label>
-		<select asp-for="WorkModeId">
-			@foreach (var workMode in @Model.WorkModeOptions)
-			{
-				<option
-					selected="@workMode.Id==@Model.WorkModeId"
-					value="@workMode.Id">
-					@workMode.Mode
-				</option>
-			}
-		</select>
-		<span asp-validation-for="WorkModeId" class="text-danger"></span>
-	</div>
+			<div class="col-6">
+				<fieldset class="border border-2 rounded-2 p-4">
+					<legend class="float-none w-auto p-2">Details</legend>
+					<div class="form-group">
+						<label asp-for="Title"></label>
+						<input class="form-control" type="text" asp-for="Title"/>
+						<span asp-validation-for="Title" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Employer"></label>
+						<input class="form-control" type="text" asp-for="Employer"/>
+						<span asp-validation-for="Employer" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="Location"></label>
+						<input class="form-control" type="text" asp-for="Location"/>
+						<span asp-validation-for="Location" class="text-danger"></span>
+					</div>
+					<div class="d-flex gap-2">
+						<div class="form-group">
+							<label asp-for="JobTypeId"></label>
+							<select asp-for="JobTypeId">
+								@foreach (var jobType in @Model.JobTypeOptions)
+								{
+									<option
+										selected="@jobType.Id==@Model.JobTypeId"
+										value="@jobType.Id">
+										@jobType.Type
+									</option>
+								}
+							</select>
+							<span asp-validation-for="JobTypeId" class="text-danger"></span>
+						</div>
+						<div class="form-group">
+							<label asp-for="WorkModeId"></label>
+							<select asp-for="WorkModeId">
+								@foreach (var workMode in @Model.WorkModeOptions)
+								{
+									<option
+										selected="@workMode.Id==@Model.WorkModeId"
+										value="@workMode.Id">
+										@workMode.Mode
+									</option>
+								}
+							</select>
+							<span asp-validation-for="WorkModeId" class="text-danger"></span>
+						</div>
+					</div>
+				</fieldset>
+			</div>
+		</div>
 
-	<button type="submit" class="btn btn-outline-success">Submit</button>
-</form>
+		<div class="row">
+			<fieldset class="border border-2 rounded-2 p-2">
+				<legend class="float-none w-auto p-2">Description</legend>
+				<div class="form-group">
+					<textarea class="form-control" asp-for="Description"></textarea>
+					<span asp-validation-for="Description" class="text-danger"></span>
+				</div>
+			</fieldset>
+		</div>
+
+		<button type="submit" class="btn btn-outline-success">Submit</button>
+	</form>
+</div>

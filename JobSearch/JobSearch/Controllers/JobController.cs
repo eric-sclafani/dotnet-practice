@@ -22,8 +22,6 @@ public class JobController : Controller
 			return RedirectToAction("PageNotFound", "Home");
 		}
 
-		// for job type and work mode, need to join on LU table 
-
 		JobViewModel jobVm = new()
 		{
 			JobId = job.Id,
@@ -75,13 +73,15 @@ public class JobController : Controller
 	}
 
 	[HttpPost]
-	public IActionResult AddEdit(JobViewModel jobVmForm)
+	public IActionResult AddEdit(JobViewModel form)
 	{
 		if (!ModelState.IsValid)
 		{
 			return View();
 		}
 
-		return View();
+		
+		
+		return RedirectToAction("Index", new { id = form.JobId });
 	}
 }

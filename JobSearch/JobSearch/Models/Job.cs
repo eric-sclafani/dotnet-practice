@@ -13,7 +13,7 @@ public class Job
 	public string Location { get; set; } = string.Empty;
 	public int MinSalary { get; set; }
 	public int MaxSalary { get; set;  }
-	public string PaySpecification { get; set; } = string.Empty;
+	public string PayType { get; set; } = string.Empty;
 
 	public JobType JobType { get; set; } = null!;
 	public int JobTypeId { get; set; }
