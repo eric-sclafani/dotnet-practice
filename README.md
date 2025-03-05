@@ -11,3 +11,5 @@ A collection of small practice C# apps (console, web app, etc...).
 - GithubActivity - a small app that when provided a Github username, retrieves that user's events using the Github API (unauthorized version)
 
 - BlogApp - A standard CRUD blogging app using ASP.NET Core MVC, Bootstrap, and JQuery
+
+- JobSearch - a mock job board website using ASP.NET Core. Unfinished for now.
