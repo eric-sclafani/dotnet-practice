@@ -10,7 +10,8 @@ public class JobViewModel
 	public string Title { get; set; } = string.Empty;
 	public string Description { get; set; } = string.Empty;
 	public string Employer { get; set; } = string.Empty;
-	public string Location { get; set; } = string.Empty;
+	public string City { get; set; } = string.Empty;
+	public string State { get; set; } = string.Empty;
 	public string PayType { get; set; } = string.Empty;
 	[DisplayName("Job Type")] public int JobTypeId { get; set; }
 	[DisplayName("Work Mode")] public int WorkModeId { get; set; }

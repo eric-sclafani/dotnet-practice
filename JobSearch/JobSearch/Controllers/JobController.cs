@@ -29,7 +29,8 @@ public class JobController : Controller
 			Title = job.Title,
 			Description = job.Description,
 			Employer = job.Employer,
-			Location = job.Location,
+			City = job.City,
+			State = job.State
 		};
 		return View(jobVm);
 	}
@@ -64,11 +65,12 @@ public class JobController : Controller
 		vm.Title = job.Title;
 		vm.Description = job.Description;
 		vm.Employer = job.Employer;
-		vm.Location = job.Location;
+		vm.City = job.City;
+		vm.State = job.State;
 		vm.MinSalary = job.MinSalary;
 		vm.MaxSalary = job.MaxSalary;
 		vm.PayType = job.PayType;
-		
+
 
 		ViewBag.IsEditing = true;
 		return View(vm);
@@ -94,7 +96,8 @@ public class JobController : Controller
 				Title = form.Title,
 				Description = form.Description,
 				Employer = form.Employer,
-				Location = form.Location,
+				City = form.City,
+				State = form.State,
 				PayType = form.PayType,
 				WorkModeId = form.WorkModeId,
 				JobTypeId = form.JobTypeId,
@@ -109,7 +112,8 @@ public class JobController : Controller
 		job.Title = form.Title;
 		job.Description = form.Description;
 		job.Employer = form.Employer;
-		job.Location = form.Location;
+		job.City = form.City;
+		job.State = form.State;
 		job.PayType = form.PayType;
 		job.WorkModeId = form.WorkModeId;
 		job.JobTypeId = form.JobTypeId;

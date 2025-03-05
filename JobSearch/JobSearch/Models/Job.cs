@@ -10,7 +10,8 @@ public class Job
 	public required string Title { get; set; }
 	public required string Description { get; set; } 
 	public required string Employer { get; set; }
-	public string Location { get; set; } = string.Empty;
+	public string City { get; set; } = string.Empty;
+	public string State { get; set; } = string.Empty;
 	public int MinSalary { get; set; }
 	public int MaxSalary { get; set;  }
 	public string PayType { get; set; } = string.Empty;
