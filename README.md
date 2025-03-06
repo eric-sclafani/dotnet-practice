@@ -13,3 +13,4 @@ A collection of small practice C# apps (console, web app, etc...).
 - BlogApp - A standard CRUD blogging app using ASP.NET Core MVC, Bootstrap, and JQuery
 
 - JobSearch - a mock job board website using ASP.NET Core. Unfinished for now.
+- finance-tracker - Razor Pages project mimicking my finance tracking spreadsheet (at a baseline)

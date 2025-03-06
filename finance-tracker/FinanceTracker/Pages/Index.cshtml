@@ -1,0 +1,45 @@
+﻿@page
+@model IndexModel
+@{
+	ViewData["Title"] = "Home page";
+}
+
+
+<div id="info-card">
+	<ul id="info-items">
+		<li class="row">
+			<span class="col-3">@Html.DisplayNameFor(model => model.Budget.CashIn):</span>
+			<span class="col">$@Html.DisplayFor(model => model.Budget.CashIn)</span>
+		</li>
+		<li class="row">
+			<span class="col-9">@Html.DisplayNameFor(model => model.Budget.CashOut):</span>
+			<span class="col-3">$@Html.DisplayFor(model => model.Budget.CashOut)</span>
+		</li>
+		<li class="row">
+			<span class="col-9">@Html.DisplayNameFor(model => model.Budget.DisposableIncome):</span>
+			<span class="col-3">$@Html.DisplayFor(model => model.Budget.DisposableIncome)</span>
+		</li>
+		<li class="row">
+			<span class="col-9">@Html.DisplayNameFor(model => model.Balance):</span>
+			<span class="col-3">$@Html.DisplayFor(model => model.Balance)</span>
+		</li>
+	</ul>
+</div>
+
+
+<section id="fixed-expenses-wrapper">
+	<div class="d-flex gap-3 mb-2">
+		<h3>Fixed Expenses</h3>
+		<a asp-page="FixedExpense/Create" class="btn btn-info rounded-3">Create New</a>
+	</div>
+	@await Component.InvokeAsync("FixedExpense")
+</section>
+
+
+<section id="purchases-wrapper">
+	<div class="d-flex gap-3 mb-2">
+		<h3>Purchases</h3>
+		<a asp-page="Purchase/Create" class="btn btn-info rounded-3">Create New</a>
+	</div>
+	@await Component.InvokeAsync("Purchases")
+</section>

@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        <PrivateAssets>all</PrivateAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="PagesFixedExpense\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesFixedExpense\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesFixedExpense\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesFixedExpense\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesFixedExpense\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\Budget\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\FixedExpenses\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\Components\Purchases\Default.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesBudget\Create.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesBudget\Delete.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesBudget\Details.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesBudget\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="PagesBudget\Index.cshtml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Pages\Shared\Components\Budget\Default.cshtml" />
+    </ItemGroup>
+
+</Project>
