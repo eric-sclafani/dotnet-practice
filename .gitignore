@@ -1,8 +1,10 @@
 *.DS_Store
 **/*.idea
+**/Data/*.csv
 **/bin/
 **/obj/
 **/Migrations
 **/*.db
 **/*.db-shm
 **/*.db-wal
+**/*.env
