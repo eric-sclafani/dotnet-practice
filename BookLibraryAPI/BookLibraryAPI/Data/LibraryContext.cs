@@ -10,6 +10,7 @@ public class LibraryContext : DbContext
 
 	public LibraryContext(DbContextOptions<LibraryContext> options) : base(options)
 	{
+		
 	}
 
 	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

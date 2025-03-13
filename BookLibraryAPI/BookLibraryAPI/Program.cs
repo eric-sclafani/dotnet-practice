@@ -1,4 +1,5 @@
 using BookLibraryAPI.Data;
+using BookLibraryAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,4 +44,6 @@ app.UseAuthorization();
 app.MapGet("/error", () => "Oops! Something went wrong :(");
 app.MapControllers();
 
-app.Run();
+var parser = new CsvParser("Data/books.csv");
+
+//app.Run();
