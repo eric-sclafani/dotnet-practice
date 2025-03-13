@@ -17,5 +17,5 @@ public class Book
 	public DateOnly PublicationDate { get; set; }
 	public string Publisher { get; set; } = string.Empty;
 
-	public List<Author> Authors { get; set; } = [];
+	public IList<Author> Authors { get; set; } = [];
 }

@@ -25,7 +25,7 @@ public class CsvParser
 		{
 			csv.Read(); // Moves the reader to the first row (header row)
 			csv.ReadHeader(); // Reads the header row and maps column names
-			var expectedColumnCount = csv.HeaderRecord.Length; // Get correct column count
+			var expectedColumnCount = csv.HeaderRecord?.Length; // Get correct column count
 
 			while (csv.Read())
 			{
@@ -62,29 +62,41 @@ public class CsvParser
 		return config;
 	}
 
-	public IList<Book> CreateBookRecords()
+	public IList<Book> CreateRecords()
 	{
-		var count = 1;
+		var bookId = 1;
+		var authorId = 1;
+
 		IList<Book> books = [];
+		IList<Author> authors = [];
+		IList<AuthorBook> authorBooks = [];
+
 		var badRecords = 0;
+		IList<string> seenAuthors = [];
 		foreach (var record in _records)
 		{
 			try
 			{
-				books.Add(new Book()
+				books.Add(CreateBook(record, bookId));
+
+				var authorNames = record.authors.Split("/").Select((s) => s.Trim());
+				foreach (var name in authorNames)
 				{
-					Id = count,
-					Title = record.title,
-					AverageRating = double.Parse(record.average_rating),
-					Isbn = record.isbn,
-					Isbn13 = record.isbn13,
-					NumPages = int.Parse(record.num_pages),
-					RatingsCount = int.Parse(record.ratings_count),
-					TextReviewsCount = int.Parse(record.text_reviews_count),
-					PublicationDate = DateOnly.Parse(record.publication_date),
-					Publisher = record.publisher
-				});
-				count++;
+					if (!seenAuthors.Contains(name))
+					{
+						Console.WriteLine(name);
+						authors.Add(CreateAuthor(name, authorId));
+						authorId++;
+					}
+					else
+					{
+						seenAuthors.Add(name);
+					}
+
+					authorBooks.Add(CreateAuthorBook(bookId, authorId));
+				}
+
+				bookId++;
 			}
 			catch (Exception e)
 			{
@@ -92,35 +104,50 @@ public class CsvParser
 			}
 		}
 
-		Console.WriteLine($"BOOKS: {books.Count} records created");
-		Console.WriteLine($"BOOKS: {badRecords} bad records skipped.");
+		Console.WriteLine($"{books.Count} book records created");
+		Console.WriteLine($"{authors.Count} author records created");
+		Console.WriteLine($"{authorBooks.Count} author link book records created");
+		Console.WriteLine($"{badRecords} bad records skipped.");
 		return books;
 	}
 
-	public IList<Author> CreateAuthorRecords()
+	private static Book CreateBook(BooksCsv record, int id)
 	{
-		IList<Author> authors = [];
-
-		var count = 0;
-		var badRecords = 0;
-
-		var authorNames = GetAuthorNames();
-
-
-		Console.WriteLine($"AUTHORS: {authors.Count} records created");
-		Console.WriteLine($"AUTHORS: {badRecords} bad records found and were skipped.");
-		return authors;
+		var book = new Book()
+		{
+			Id = id,
+			Title = record.title,
+			AverageRating = double.Parse(record.average_rating),
+			Isbn = record.isbn,
+			Isbn13 = record.isbn13,
+			NumPages = int.Parse(record.num_pages),
+			RatingsCount = int.Parse(record.ratings_count),
+			TextReviewsCount = int.Parse(record.text_reviews_count),
+			PublicationDate = DateOnly.Parse(record.publication_date),
+			Publisher = record.publisher
+		};
+		return book;
 	}
 
-	private string[] GetAuthorNames()
+	private static Author CreateAuthor(string name, int id)
 	{
-		string[] authorNames = [];
-
-		foreach (var record in _records)
+		var author = new Author()
 		{
-			Console.WriteLine(record.authors);
-		}
+			Id = id,
+			Name = name
+		};
 
-		return authorNames;
+		return author;
+	}
+
+	private static AuthorBook CreateAuthorBook(int bookId, int authorId)
+	{
+		var authorBook = new AuthorBook()
+		{
+			BookId = bookId,
+			AuthorId = authorId
+		};
+
+		return authorBook;
 	}
 }

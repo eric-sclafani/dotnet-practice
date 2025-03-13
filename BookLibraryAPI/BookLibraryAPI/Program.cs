@@ -45,5 +45,5 @@ app.MapGet("/error", () => "Oops! Something went wrong :(");
 app.MapControllers();
 
 var parser = new CsvParser("Data/books.csv");
-
+parser.CreateRecords();
 //app.Run();
