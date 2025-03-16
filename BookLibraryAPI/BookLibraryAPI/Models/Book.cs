@@ -16,6 +16,5 @@ public class Book
 	public int TextReviewsCount { get; set; }
 	public DateOnly PublicationDate { get; set; }
 	public string Publisher { get; set; } = string.Empty;
-
 	public IList<Author> Authors { get; set; } = [];
 }

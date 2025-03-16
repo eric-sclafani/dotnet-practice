@@ -62,14 +62,14 @@ public class CsvParser
 		return config;
 	}
 
-	public IList<Book> CreateRecords()
+	public Library CreateAllRecords()
 	{
 		var bookId = 1;
 		var authorId = 1;
 
 		IList<Book> books = [];
 		IList<Author> authors = [];
-		IList<AuthorBook> authorBooks = [];
+		IList<BookLinkAuthor> bookLinkAuthor = [];
 
 		var badRecords = 0;
 		IList<string> seenAuthors = [];
@@ -84,16 +84,17 @@ public class CsvParser
 				{
 					if (!seenAuthors.Contains(name))
 					{
-						Console.WriteLine(name);
-						authors.Add(CreateAuthor(name, authorId));
+						var author = CreateAuthor(name, authorId);
+						authors.Add(author);
+						seenAuthors.Add(name);
+						bookLinkAuthor.Add(CreateAuthorBook(bookId, authorId));
 						authorId++;
 					}
 					else
 					{
-						seenAuthors.Add(name);
+						var author = authors.First(a => a.Name == name);
+						bookLinkAuthor.Add(CreateAuthorBook(bookId, author.Id));
 					}
-
-					authorBooks.Add(CreateAuthorBook(bookId, authorId));
 				}
 
 				bookId++;
@@ -104,11 +105,18 @@ public class CsvParser
 			}
 		}
 
+		var result = new Library()
+		{
+			Books = books,
+			Authors = authors,
+			BookLinkAuthor = bookLinkAuthor
+		};
+
 		Console.WriteLine($"{books.Count} book records created");
 		Console.WriteLine($"{authors.Count} author records created");
-		Console.WriteLine($"{authorBooks.Count} author link book records created");
+		Console.WriteLine($"{bookLinkAuthor.Count} author link book records created");
 		Console.WriteLine($"{badRecords} bad records skipped.");
-		return books;
+		return result;
 	}
 
 	private static Book CreateBook(BooksCsv record, int id)
@@ -140,12 +148,12 @@ public class CsvParser
 		return author;
 	}
 
-	private static AuthorBook CreateAuthorBook(int bookId, int authorId)
+	private static BookLinkAuthor CreateAuthorBook(int bookId, int authorId)
 	{
-		var authorBook = new AuthorBook()
+		var authorBook = new BookLinkAuthor()
 		{
-			BookId = bookId,
-			AuthorId = authorId
+			BooksBookId = bookId,
+			AuthorsAuthorId = authorId
 		};
 
 		return authorBook;
