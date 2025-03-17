@@ -21,7 +21,7 @@ public class LibraryContext : DbContext
 	protected override void OnModelCreating(ModelBuilder modelBuilder)
 	{
 		EstablishRelationships(modelBuilder);
-		SeedData(modelBuilder);
+		//SeedData(modelBuilder);
 	}
 
 	private static void EstablishRelationships(ModelBuilder modelBuilder)
