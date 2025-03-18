@@ -75,4 +75,18 @@ public class LibraryController : Controller
 
 		return books;
 	}
+
+	[HttpGet]
+	public Book GetBookByIsbn(string isbn)
+	{
+		var book = _context.Books.First(b => b.Isbn == isbn);
+		return book;
+	}
+
+	[HttpGet]
+	public IEnumerable<Book> GetBooksByPublisher(string publisher)
+	{
+		var books = _context.Books.Where(b => b.Publisher == publisher);
+		return books;
+	}
 }
